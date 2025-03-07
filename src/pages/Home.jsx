@@ -48,7 +48,7 @@ const Home = () => {
     <Container maxWidth="lg">
       <Box sx={{ mt: 8, mb: 4 }}>
         <Typography variant="h3" component="h1" gutterBottom align="center">
-          Добро пожаловать в игру "The know-it-all"!
+          The know-it-all
         </Typography>
         <Typography variant="h5" color="text.secondary" align="center" paragraph>
           Проверьте свои знания в различных категориях и соревнуйтесь с другими игроками
