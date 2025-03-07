@@ -57,7 +57,7 @@ function Navbar() {
             alignItems: 'center',
           }}
         >
-          <EmojiEventsIcon sx={{ mr: 1 }} />
+          <EmojiEventsIcon sx={{ mr: 1, color: '#fff' }} />
           The know-it-all
         </Typography>
         <Box sx={{ display: 'flex', gap: 2 }}>
