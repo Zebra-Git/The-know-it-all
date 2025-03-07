@@ -15,6 +15,13 @@ import {
     ListItemText,
     ListItemIcon,
     Divider,
+    Button,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
+    TextField,
+    Alert
 } from '@mui/material'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../config/firebase'
@@ -27,9 +34,12 @@ const MotionCard = motion(Card)
 
 function Profile() {
     const navigate = useNavigate()
-    const { currentUser } = useAuth()
+    const { currentUser, deleteAccount } = useAuth()
     const [userData, setUserData] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [openDialog, setOpenDialog] = useState(false)
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
 
     useEffect(() => {
         if (!currentUser) {
@@ -52,6 +62,20 @@ function Profile() {
 
         fetchUserData()
     }, [currentUser, navigate])
+
+    const handleDeleteAccount = async () => {
+        setError('')
+        setLoading(true)
+
+        try {
+            await deleteAccount(password)
+            navigate('/')
+        } catch (err) {
+            setError(err.message)
+        } finally {
+            setLoading(false)
+        }
+    }
 
     if (loading) {
         return (
@@ -178,7 +202,50 @@ function Profile() {
                         </MotionCard>
                     </Grid>
                 </Grid>
+
+                <Box sx={{ mt: 4 }}>
+                    <Button
+                        variant="contained"
+                        color="error"
+                        onClick={() => setOpenDialog(true)}
+                    >
+                        Удалить аккаунт
+                    </Button>
+                </Box>
             </MotionPaper>
+
+            <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+                <DialogTitle>Подтверждение удаления аккаунта</DialogTitle>
+                <DialogContent>
+                    <Typography variant="body1" gutterBottom>
+                        Для удаления аккаунта введите свой пароль
+                    </Typography>
+                    {error && (
+                        <Alert severity="error" sx={{ mt: 2 }}>
+                            {error}
+                        </Alert>
+                    )}
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        label="Пароль"
+                        type="password"
+                        fullWidth
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setOpenDialog(false)}>Отмена</Button>
+                    <Button
+                        onClick={handleDeleteAccount}
+                        color="error"
+                        disabled={loading}
+                    >
+                        Удалить
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Container>
     )
 }
