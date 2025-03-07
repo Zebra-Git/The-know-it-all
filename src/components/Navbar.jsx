@@ -17,7 +17,7 @@ import { useAuth } from '../contexts/AuthContext'
 function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null)
   const navigate = useNavigate()
-  const { currentUser, signOut } = useAuth()
+  const { currentUser, logout } = useAuth()
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget)
@@ -35,7 +35,7 @@ function Navbar() {
   const handleLogout = async () => {
     handleClose()
     try {
-      await signOut()
+      await logout()
       navigate('/login')
     } catch (error) {
       console.error('Ошибка при выходе:', error)
@@ -57,7 +57,7 @@ function Navbar() {
             alignItems: 'center',
           }}
         >
-          <EmojiEventsIcon sx={{ mr: 1 }} />
+          <EmojiEventsIcon sx={{ mr: 1, color: '#fff' }} />
           The know-it-all
         </Typography>
         <Box sx={{ display: 'flex', gap: 2 }}>
