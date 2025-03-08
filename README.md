@@ -23,7 +23,7 @@
 1. Клонируйте репозиторий:
 
 ```bash
-git clone -b result2 https://github.com/Zebra-Git/The-know-it-all.git
+git clone https://github.com/Zebra-Git/The-know-it-all.git
 cd the-know-it-all
 ```
 
