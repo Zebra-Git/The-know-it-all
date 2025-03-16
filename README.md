@@ -25,11 +25,10 @@
 ```bash
 git clone https://github.com/Zebra-Git/The-know-it-all.git
 cd the-know-it-all
-Нужно установить Node.js с официального сайта
 
 ```
 
-2. Установите зависимости:
+2. Установите зависимости (но предварительно нужно установить Node.js с официального сайта, если он у вас не установлен):
 ```bash
 npm install
 ```
