@@ -25,6 +25,8 @@
 ```bash
 git clone https://github.com/Zebra-Git/The-know-it-all.git
 cd the-know-it-all
+Нужно установить Node.js с официального сайта
+
 ```
 
 2. Установите зависимости:
